@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tramas · Chalinas beige y oscuras</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EFE6D6;--surface:#E4D7BF;--ink:#2B211B;--muted:#6B5A4C;--accent:#8A6338;--accent-ink:#fff;--line:#CDBB9A;--dark:#2B211B;--dark-ink:#EFE6D6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1F1813;--surface:#2B211B;--ink:#EFE6D6;--muted:#BBA98F;--accent:#C79A63;--accent-ink:#1F1813;--line:#44362B;--dark:#120D0A;--dark-ink:#EFE6D6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1F1813;--surface:#2B211B;--ink:#EFE6D6;--muted:#BBA98F;--accent:#C79A63;--accent-ink:#1F1813;--line:#44362B;--dark:#120D0A;--dark-ink:#EFE6D6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Jost,system-ui,sans-serif}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 5vw;border-bottom:1px solid var(--line)}
+.logo{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:700;letter-spacing:.02em}
+.cartbtn{background:none;border:1px solid var(--ink);color:var(--ink);padding:9px 18px;border-radius:999px}
+.cartbtn b{display:inline-block;min-width:22px;margin-left:6px;background:var(--ink);color:var(--bg);border-radius:999px;font-weight:500}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:70vh}
+.hero-text{padding:8vh 5vw;display:flex;flex-direction:column;justify-content:center;gap:24px}
+.hero h1{font-size:clamp(46px,7vw,92px);font-weight:700;max-width:11ch}
+.hero p{max-width:44ch;color:var(--muted);font-size:18px;margin:0}
+.cta{align-self:flex-start;background:var(--accent);color:var(--accent-ink);border:0;padding:15px 32px;border-radius:999px;font-weight:500;text-decoration:none}
+.hero-art{background:var(--surface);display:grid;place-items:center;padding:6vh 4vw;position:relative;overflow:hidden}
+.hero-art svg{width:min(78%,380px);height:auto;filter:drop-shadow(0 18px 24px rgba(43,33,27,.25))}
+.hero-art .b{transform:rotate(-7deg)}
+.hero-art .d{position:absolute;right:8%;bottom:-6%;width:min(52%,260px);transform:rotate(9deg)}
+section.shop{padding:9vh 5vw}
+.shophead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:36px}
+.shophead h2{font-size:clamp(34px,4vw,52px)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{background:none;border:1px solid var(--line);color:var(--ink);padding:8px 20px;border-radius:999px}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px}
+.card{display:flex;flex-direction:column;gap:12px}
+.card .pic{background:var(--surface);aspect-ratio:4/5;display:grid;place-items:center;border-radius:4px}
+.card .pic.dk{background:var(--surface)}
+.card svg{width:62%;height:auto}
+.card h3{font-size:26px}
+.card .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:15px}
+.card .add{background:none;border:1px solid var(--ink);color:var(--ink);padding:10px;border-radius:999px}
+.card .add:hover{background:var(--ink);color:var(--bg)}
+.care{background:var(--bg);border-top:1px solid var(--line);color:var(--ink);padding:9vh 5vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px}
+.care h3{font-size:30px;margin-bottom:8px}
+.care p{margin:0;color:var(--muted);max-width:36ch}
+footer{padding:36px 5vw;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:var(--bg);border-left:1px solid var(--line);padding:calc(24px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(105%);transition:transform .3s;display:flex;flex-direction:column;z-index:20}
+#drawer.open{transform:none}
+#drawer h2{font-size:32px;margin-bottom:16px;display:flex;justify-content:space-between}
+#drawer h2 button{background:none;border:0;color:var(--ink);font-size:28px;line-height:1}
+#items{flex:1;overflow:auto;display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}
+.sw{width:48px;height:48px;border-radius:4px}
+.row small{color:var(--muted);display:block}
+.qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--ink);background:none;color:var(--ink)}
+.empty{color:var(--muted)}
+.total{display:flex;justify-content:space-between;font-size:20px;padding:16px 0}
+.pay{background:var(--accent);color:var(--accent-ink);border:0;padding:15px;border-radius:999px;font-weight:500}
+.pay:disabled{opacity:.4;cursor:not-allowed}
+#msg{margin:12px 0 0;color:var(--muted);min-height:24px;font-size:15px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero-art{min-height:46vh}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Tramas</div>
+  <button class="cartbtn" id="open" aria-label="Abrir carrito">Carrito <b id="count">0</b></button>
+</header>
+
+<main>
+<div class="hero">
+  <div class="hero-text">
+    <h1>Chalinas tejidas en beige y tonos oscuros</h1>
+    <p>Alpaca y lana suave, de tonos arena a café profundo. Elige la que combine con tu abrigo y pídela desde aquí.</p>
+    <a class="cta" href="#tienda">Ver chalinas</a>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="b" id="h1"></div>
+    <div class="d" id="h2"></div>
+  </div>
+</div>
+
+<section class="shop" id="tienda">
+  <div class="shophead">
+    <h2>Colección de otoño</h2>
+    <div class="filters" role="group" aria-label="Filtrar por color">
+      <button data-f="all" aria-pressed="true">Todas</button>
+      <button data-f="beige" aria-pressed="false">Beige</button>
+      <button data-f="oscuro" aria-pressed="false">Oscuras</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="care">
+  <div><h3>Fibras suaves</h3><p>Alpaca baby y mezclas de lana que abrigan sin picar.</p></div>
+  <div><h3>Medidas generosas</h3><p>180 × 60 cm: se usa suelta, doblada o como manta de viaje.</p></div>
+  <div><h3>Cuidado simple</h3><p>Lavado a mano con agua fría y secado en plano.</p></div>
+</section>
+</main>
+
+<footer><span>© 2026 Tramas</span><span>Envíos a todo el país</span></footer>
+
+<aside id="drawer" aria-label="Carrito de compras" aria-hidden="true">
+  <h2>Tu carrito <button id="close" aria-label="Cerrar carrito">×</button></h2>
+  <div id="items"></div>
+  <div class="total"><span>Total</span><strong id="total">S/ 0</strong></div>
+  <button class="pay" id="pay" disabled>Confirmar pedido</button>
+  <p id="msg" role="status"></p>
+</aside>
+
+<script>
+const P=[
+ {id:1,n:"Arena",t:"beige",c:"#D9C5A3",s:"#B39668",m:"Alpaca baby",p:140},
+ {id:2,n:"Lino claro",t:"beige",c:"#E7DAC0",s:"#C9B48B",m:"Lana merino",p:95},
+ {id:3,n:"Camello",t:"beige",c:"#BF9E72",s:"#8F6F46",m:"Alpaca y lana",p:120},
+ {id:4,n:"Avena",t:"beige",c:"#CDBB9A",s:"#EFE6D6",m:"Lana de oveja",p:70},
+ {id:5,n:"Café oscuro",t:"oscuro",c:"#3A2B22",s:"#6B4E3A",m:"Alpaca baby",p:150},
+ {id:6,n:"Carbón",t:"oscuro",c:"#2E2B29",s:"#5A544F",m:"Lana merino",p:110},
+ {id:7,n:"Vino tinto",t:"oscuro",c:"#4A2530",s:"#7A4455",m:"Alpaca y lana",p:130},
+ {id:8,n:"Verde bosque",t:"oscuro",c:"#26352C",s:"#4C6554",m:"Lana de oveja",p:85}
+];
+function scarf(c,s){
+  let f="";for(let i=0;i<14;i++){f+=`<line x1="${46+i*11.4}" y1="262" x2="${46+i*11.4+(i%2?2:-2)}" y2="292" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>`}
+  let w="";for(let y=28;y<258;y+=6){w+=`<line x1="40" y1="${y}" x2="200" y2="${y}" stroke="#000" stroke-opacity=".07"/>`}
+  return `<svg viewBox="0 0 240 300" role="img" aria-label="Chalina"><rect x="40" y="16" width="160" height="246" rx="3" fill="${c}"/>${w}<rect x="40" y="44" width="160" height="7" fill="${s}"/><rect x="40" y="58" width="160" height="2.5" fill="${s}"/><rect x="40" y="226" width="160" height="2.5" fill="${s}"/><rect x="40" y="234" width="160" height="7" fill="${s}"/>${f}</svg>`;
+}
+document.getElementById("h1").innerHTML=scarf("#D9C5A3","#A07C4C");
+document.getElementById("h2").innerHTML=scarf("#4A2530","#7A4455");
+const cart={};let filter="all";
+const $=id=>document.getElementById(id);
+function render(){
+  $("grid").innerHTML=P.filter(p=>filter==="all"||p.t===filter).map(p=>`
+  <article class="card">
+    <div class="pic ${p.t==="oscuro"?"dk":""}">${scarf(p.c,p.s)}</div>
+    <h3>${p.n}</h3>
+    <div class="meta"><span>${p.m}</span><span>S/ ${p.p}</span></div>
+    <button class="add" data-id="${p.id}">Agregar al carrito</button>
+  </article>`).join("");
+}
+function drawCart(){
+  const ids=Object.keys(cart);let total=0,n=0;
+  $("items").innerHTML=ids.length?ids.map(id=>{const p=P.find(x=>x.id==id),q=cart[id];total+=p.p*q;n+=q;
+    return `<div class="row"><div class="sw" style="background:${p.c}"></div><div>${p.n}<small>S/ ${p.p} · ${p.m}</small></div><div class="qty"><button data-d="-1" data-id="${id}" aria-label="Quitar uno">−</button> ${q} <button data-d="1" data-id="${id}" aria-label="Agregar uno">+</button></div></div>`}).join(""):'<p class="empty">Tu carrito está vacío. Agrega una chalina para empezar.</p>';
+  $("total").textContent="S/ "+total;$("count").textContent=n;$("pay").disabled=!n;
+}
+function toggle(o){$("drawer").classList.toggle("open",o);$("drawer").setAttribute("aria-hidden",!o)}
+document.querySelector(".filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;filter=b.dataset.f;
+  document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b));render()};
+$("grid").onclick=e=>{const b=e.target.closest(".add");if(!b)return;cart[b.dataset.id]=(cart[b.dataset.id]||0)+1;$("msg").textContent="";drawCart();toggle(true)};
+$("items").onclick=e=>{const b=e.target.closest("button");if(!b)return;const id=b.dataset.id;cart[id]+=+b.dataset.d;if(cart[id]<=0)delete cart[id];drawCart()};
+$("open").onclick=()=>toggle(true);$("close").onclick=()=>toggle(false);
+$("pay").onclick=()=>{Object.keys(cart).forEach(k=>delete cart[k]);drawCart();$("msg").textContent="Pedido confirmado. Te contactaremos para coordinar el pago y el envío."};
+render();drawCart();
+</script>
+</body>
+</html>
